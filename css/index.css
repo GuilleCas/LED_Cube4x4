@@ -196,7 +196,7 @@ body {
     transform: translateY(-50%);
 }
 
-.home-section {
+.header-section {
     position: relative;
     height: 100vh;
     left: 260px;
@@ -204,31 +204,56 @@ body {
     transition: all 0.5s ease;
 }
 
-.sidebar.close~.home-section {
+.sidebar.close~.header-section {
     left: 78px;
     width: calc(100% - 78px);
 }
 
-.home-section .home-content {
+.header-section .header-content {
     height: 60px;
     display: flex;
     align-items: center;
 }
 
-.home-section .home-content .bx-menu,
-.home-section .home-content .text {
+.header-section .header-content .bx-menu,
+.header-section .header-content .text {
     color: #13293d;
     font-size: 35px;
 }
 
-.home-section .home-content .bx-menu {
+.header-section .header-content .bx-menu {
     margin: 0 15px;
     cursor: pointer;
 }
 
-.home-section .home-content .text {
+.header-section .header-content .text {
     font-size: 26px;
     font-weight: 600;
+}
+
+.header-section .principal-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.header-section .principal-buttons .Turn_On {
+    text-decoration: none;
+    padding: 5px;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #2a7221;
+    border-radius: 6px;
+    border: 1px solid #152614;
+}
+
+.header-section .principal-buttons .Turn_Off {
+    text-decoration: none;
+    padding: 5px;
+    font-size: 15px;
+    color: #ffffff;
+    background-color: #ba1f33;
+    border-radius: 6px;
+    border: 1px solid #410b13;
 }
 
 .cards_wrap {
@@ -308,13 +333,13 @@ body {
         width: 0;
     }
 
-    .home-section {
+    .header-section {
         left: 78px;
         width: calc(100% - 78px);
         z-index: 100;
     }
 
-    .sidebar.close~.home-section {
+    .sidebar.close~.header-section {
         width: 100%;
         left: 0;
     }
