@@ -9,7 +9,7 @@
 }
 
 body {
-    background: #b9d6f2;
+    background: #f2f2f2;
 }
 
 .sidebar {
@@ -271,7 +271,7 @@ body {
 
 .cards_wrap .card_inner {
     box-shadow: 1px 1px 5px;
-    background-color: #fff;
+    background-color: #b9d6f2;
     border-radius: 5px;
     padding: 35px 20px;
     min-width: 225px;
