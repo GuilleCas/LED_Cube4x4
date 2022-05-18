@@ -40,8 +40,8 @@ WiFiClient espClient;
 PubSubClient client(espClient);
 long lastMsg = 0;
 char msg[50];
-int value = 0;
-int pinled = 32;
+
+
 void callback(const char *topic, byte *payload, unsigned int lenght)
 {
   Serial.print("Mensaje recibido bajo el topico ->");
@@ -73,45 +73,29 @@ void callback(const char *topic, byte *payload, unsigned int lenght)
   }
   else if ((char)payload[0] == '5')//patron 3
   {
-    apagartodo();
+    prendeapaga();
     Serial.println("\n Todo Apagado");
   }
   else if ((char)payload[0] == '6')//patron 4
   {
-    apagartodo();
+    levels();
     Serial.println("\n Todo Apagado");
   }
   else if ((char)payload[0] == '7')//patron 5
   {
-    apagartodo();
+    espiral();
     Serial.println("\n Todo Apagado");
   }
   else if ((char)payload[0] == '8')//patron 6
   {
-    apagartodo();
+    girapalo();
     Serial.println("\n Todo Apagado");
   }
   else if ((char)payload[0] == '9')//patron 7
   {
-    apagartodo();
+    leds();
     Serial.println("\n Todo Apagado");
   }
-  else if ((char)payload[0] == '10')//patron 8
-  {
-    apagartodo();
-    Serial.println("\n Todo Apagado");
-  }
-  else if ((char)payload[0] == '11')//patron 9
-  {
-    apagartodo();
-    Serial.println("\n Todo Apagado");
-  }
-  else if ((char)payload[0] == '12')//patron 10
-  {
-    apagartodo();
-    Serial.println("\n Todo Apagado");
-  }
-
 
 
 
@@ -215,8 +199,18 @@ void prendertodo()
     digitalWrite(layer[i], 1);
   }
 }
-
-// prende y apaga de manera random
+void prendeapaga(){// prende y apaga
+ int i = 100
+    while(i != 0)
+  {
+    prendertodo()
+    delay(50);
+    apagartodo()
+    delay(50);
+    i-= 1;
+  }
+}
+// prende y apaga de manera random 1 led
 void luciernaga()
 {
   apagartodo();
@@ -258,5 +252,230 @@ void lluvia()
     digitalWrite(layer[3], 0);
     digitalWrite(column[ColuAleatoria], 1);
     
+  }
+}
+void levels()
+{
+  int x = 75;
+  for(int i = 5; i != 0; i--)
+  {
+    prendertodo();
+    for(int i = 4; i!=0; i--)
+    {
+      digitalWrite(layer[i-1], 0);
+      delay(x);
+    }
+    for(int i = 0; i<4; i++)
+    {
+      digitalWrite(layer[i], 1);
+      delay(x);
+    }
+      for(int i = 0; i<4; i++)
+    {
+      digitalWrite(layer[i], 0);
+      delay(x);
+    }
+    for(int i = 4; i!=0; i--)
+    {
+      digitalWrite(layer[i-1], 1);
+      delay(x);
+    }
+  }
+}
+
+void espiral()
+{
+  prendertodo();
+  int x = 50;
+  for(int i = 0; i<6; i++)
+  {
+    //espiral derecha
+    digitalWrite(column[0], 1);
+    delay(x);
+    digitalWrite(column[1], 1);
+    delay(x);
+    digitalWrite(column[2], 1);
+    delay(x);
+    digitalWrite(column[3], 1);
+    delay(x);
+    digitalWrite(column[7], 1);
+    delay(x);
+    digitalWrite(column[11], 1);
+    delay(x);
+    digitalWrite(column[15], 1);
+    delay(x);
+    digitalWrite(column[14], 1);
+    delay(x);
+    digitalWrite(column[13], 1);
+    delay(x);
+    digitalWrite(column[12], 1);
+    delay(x);
+    digitalWrite(column[8], 1);
+    delay(x);
+    digitalWrite(column[4], 1);
+    delay(x);
+    digitalWrite(column[5], 1);
+    delay(x);
+    digitalWrite(column[6], 1);
+    delay(x);
+    digitalWrite(column[10], 1);
+    delay(x);
+    digitalWrite(column[9], 1);
+    delay(x);
+//espiral izquierda
+    digitalWrite(column[9], 0);
+    delay(x);
+    digitalWrite(column[10], 0);
+    delay(x);
+    digitalWrite(column[6], 0);
+    delay(x);
+    digitalWrite(column[5], 0);
+    delay(x);
+    digitalWrite(column[4], 0);
+    delay(x);
+    digitalWrite(column[8], 0);
+    delay(x);
+    digitalWrite(column[12], 0);
+    delay(x);
+    digitalWrite(column[13], 0);
+    delay(x);
+    digitalWrite(column[14], 0);
+    delay(x);
+    digitalWrite(column[15], 0);
+    delay(x);
+    digitalWrite(column[11], 0);
+    delay(x);
+    digitalWrite(column[7], 0);
+    delay(x);
+    digitalWrite(column[3], 0);
+    delay(x);
+    digitalWrite(column[2], 0);
+    delay(x);
+    digitalWrite(column[1], 0);
+    delay(x);
+    digitalWrite(column[0], 0);
+    delay(x);
+  }
+}
+void apagarCol()
+{
+  for(int i = 0; i<16; i++)
+  {
+    digitalWrite(column[i], 1);
+  }
+}
+void girapalo()
+{
+  apagartodo();
+  int x = 100;
+    for(int i = 0; i<6; i++)
+    {
+      //capas
+      digitalWrite(layer[0], 1);
+      digitalWrite(layer[1], 1);
+      digitalWrite(layer[2], 1);
+      digitalWrite(layer[3], 1);
+      //
+      apagarCol();
+      digitalWrite(column[0], 0);
+      digitalWrite(column[5], 0);
+      digitalWrite(column[10], 0);
+      digitalWrite(column[15], 0);
+      delay(x);
+      //
+      apagarCol();
+      digitalWrite(column[4], 0);
+      digitalWrite(column[5], 0);
+      digitalWrite(column[10], 0);
+      digitalWrite(column[11], 0);
+      delay(x);
+      //
+      apagarCol();
+      digitalWrite(column[6], 0);
+      digitalWrite(column[7], 0);
+      digitalWrite(column[8], 0);
+      digitalWrite(column[9], 0);
+      delay(x);
+      //
+      apagarCol();
+      digitalWrite(column[3], 0);
+      digitalWrite(column[6], 0);
+      digitalWrite(column[9], 0);
+      digitalWrite(column[12], 0);
+      delay(x);
+      //
+      apagarCol();
+      digitalWrite(column[2], 0);
+      digitalWrite(column[6], 0);
+      digitalWrite(column[9], 0);
+      digitalWrite(column[13], 0);
+      delay(x);
+      //
+      apagarCol();
+      digitalWrite(column[1], 0);
+      digitalWrite(column[5], 0);
+      digitalWrite(column[10], 0);
+      digitalWrite(column[14], 0);
+      delay(x);
+    }
+}
+void AllLeds()
+{
+  int x = 50;
+  apagartodo();
+  for(int y = 0; y<5; y++)
+  {
+    //0-3
+    for(int k = 4; k != 0; k--)
+    {
+      digitalWrite(layer[k-1], 1);
+      for(int i = 0; i<4; i++)
+      {
+        digitalWrite(column[i], 0);
+        delay(x);
+        digitalWrite(column[i], 1);
+        delay(x);
+      }
+    digitalWrite(layer[k-1], 0);
+    }
+    //4-7
+    for(int k = 0; k < 4; k++)
+    {
+      digitalWrite(layer[k], 1);
+      for(int i = 4; i<8; i++)
+      {
+        digitalWrite(column[i], 0);
+        delay(x);
+        digitalWrite(column[i], 1);
+        delay(x);
+      }
+    digitalWrite(layer[k], 0);
+    }
+    //8-11
+    for(int k = 4; k != 0; k--)
+    {
+      digitalWrite(layer[k-1], 1);
+      for(int i = 8; i<12; i++)
+      {
+        digitalWrite(column[i], 0);
+        delay(x);
+        digitalWrite(column[i], 1);
+        delay(x);
+      }
+    digitalWrite(layer[k-1], 0);
+    }
+    //12-15
+    for(int k = 0; k < 4; k++)
+    {
+      digitalWrite(layer[k], 1);
+      for(int i = 12; i<16; i++)
+      {
+        digitalWrite(column[i], 0);
+        delay(x);
+        digitalWrite(column[i], 1);
+        delay(x);
+      }
+    digitalWrite(layer[k], 0);
+    }
   }
 }
